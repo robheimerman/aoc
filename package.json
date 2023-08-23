@@ -2,7 +2,6 @@
   "name": "aoc2015",
   "version": "1.0.0",
   "description": "Repo used to solve the aoc problems",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
