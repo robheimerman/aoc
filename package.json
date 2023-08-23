@@ -1,0 +1,25 @@
+{
+  "name": "aoc2015",
+  "version": "1.0.0",
+  "description": "Repo used to solve the aoc problems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robheimerman/aoc2015.git"
+  },
+  "author": "Rob Heimerman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robheimerman/aoc2015/issues"
+  },
+  "homepage": "https://github.com/robheimerman/aoc2015#readme",
+  "devDependencies": {
+    "lodash": "^4.17.21"
+  },
+  "engines": {
+    "node": ">20.5.1"
+  }
+}
