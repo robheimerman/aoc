@@ -1,9 +1,9 @@
-const fs = require('fs');
-const FILEPATH = './problem2/input.txt'
+import {readMultiLinedFile} from "../util.js";
+
+const FILEPATH = './input.txt';
 
 const _readInputFile = () =>
-    fs.readFileSync(FILEPATH, 'utf8')
-        .split('\n')
+    readMultiLinedFile(FILEPATH)
         .map(dimensions =>
             dimensions
                 .split("x")

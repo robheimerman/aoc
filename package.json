@@ -2,6 +2,8 @@
   "name": "aoc2015",
   "version": "1.0.0",
   "description": "Repo used to solve the aoc problems",
+  "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +21,6 @@
     "lodash": "^4.17.21"
   },
   "engines": {
-    "node": ">20.5.1"
+    "node": ">20.5.0"
   }
 }
