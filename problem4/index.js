@@ -7,7 +7,7 @@ const _computeHash = num => crypto.createHash('md5').update(num).digest('hex');
 const findHash = (stringToHashPrefix, patternToMatch) => {
     let num = 0;
     let hash = _computeHash(`${stringToHashPrefix}${num}`);
-    while (!hash.startsWith(patternToMatch)) {
+    while (!hash.startsWith(patternToMatch) && num < Number.MAX_SAFE_INTEGER) {
         num++;
         hash = _computeHash(`${stringToHashPrefix}${num}`)
     }
