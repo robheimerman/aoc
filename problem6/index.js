@@ -10,15 +10,7 @@ const _initializeLights = (length, width) =>
         .map(() =>
             Array.from({length: width}).fill(0));
 
-
-const partOne = instructions => {
-    const FUNCTIONS = {
-        "turn on ": () => 1,
-        "turn off ": () => 0,
-        "toggle ": state => (state + 1) % 2
-    }
-    const howManyLightsAreOn = lights => lights.reduce((a, c) => a + c.reduce((a, c) => a + c, 0), 0);
-
+const _followInstructions = (instructions, FUNCTIONS) => {
     let lights = _initializeLights(1000, 1000);
     instructions.forEach(instruction => {
         let instructionKey = instruction.split(/[0-9]/, 1);
@@ -36,12 +28,35 @@ const partOne = instructions => {
             }
         }
     });
+    return lights;
+}
+const _sumTheLightValues = lights => lights.reduce((a, c) => a + c.reduce((a, c) => a + c, 0), 0);
 
-    return howManyLightsAreOn(lights);
+const partOne = instructions => {
+    const FUNCTIONS = {
+        "turn on ": () => 1,
+        "turn off ": () => 0,
+        "toggle ": state => (state + 1) % 2
+    }
+
+    const lights = _followInstructions(instructions, FUNCTIONS);
+    return _sumTheLightValues(lights);
+}
+
+const partTwo = instructions => {
+    const FUNCTIONS = {
+        "turn on ": state => state + 1,
+        "turn off ": state => Math.max(0, state - 1),
+        "toggle ": state => (state + 2)
+    }
+
+    const lights = _followInstructions(instructions, FUNCTIONS);
+
+    return _sumTheLightValues(lights);
 }
 
 
-
 console.log(`Part one solution: ${partOne(inputFile)}`);
+console.log(`Part two solution: ${partTwo(inputFile)}`);
 
 
