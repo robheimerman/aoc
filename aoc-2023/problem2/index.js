@@ -27,11 +27,10 @@ const partOne = () => {
     const isValidHandful = (obj) => {
         const color = Object.keys(obj)[0];
         const value = obj[color];
-        let b = value <= LIMITS[color];
-        return b;
+        return value <= LIMITS[color];
     }
 
-    readFileAndFilter('./input-p1.txt')
+    readFileAndFilter('./input.txt')
         .map(line => parseLine(line))
         .forEach(game => {
             if (game.games.every(gameObj => gameObj.every(obj => isValidHandful(obj)))) {
@@ -42,5 +41,29 @@ const partOne = () => {
     return total;
 }
 
-console.log(partOne());
-// console.log(partTwo());
+const partTwo = () => {
+    let total = 0;
+
+    readFileAndFilter('./input.txt')
+        .map(line => {
+            const gameObj = parseLine(line);
+            const mins = {'red': -Infinity, 'green': -Infinity, 'blue': -Infinity};
+            gameObj.games.forEach(game => {
+
+                game.forEach(turn => {
+                    const color = Object.keys(turn)[0];
+                    const numberOfCubes = turn[color];
+                    if (numberOfCubes > mins[color]) {
+                        mins[color] = numberOfCubes;
+                    }
+                });
+
+            });
+            total += Object.values(mins).reduce((a, c) => a * c, 1);
+        });
+
+    return total;
+}
+
+// console.log(partOne());
+console.log(partTwo());
