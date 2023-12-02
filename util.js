@@ -6,6 +6,8 @@ export const readMultiLinedFile = filePath =>
     fs.readFileSync(filePath, 'utf8')
         .split('\n');
 
-export const appendFile = (filePath, data) => {
-    fs.appendFileSync(filePath, `${JSON.stringify(data)}\n`);
-}
+export const readFileAndFilter = filePath =>
+    readMultiLinedFile(filePath)
+        .filter(line => Boolean(line.length));
+
+
