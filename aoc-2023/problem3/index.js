@@ -33,7 +33,6 @@ const getPartNumber = (schematics, [y, x]) => {
         pos -= 1;
     }
 
-    // pos will end up one too small
     pos += 1;
 
     while (isDigit(schematics[y][pos])) {
