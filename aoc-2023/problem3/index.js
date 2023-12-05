@@ -2,7 +2,7 @@ import {readFileAndFilter} from "../../util.js";
 
 const isDigit = chr => /[0-9]/.test((chr || 'a'));
 const isSymbol = chr => /[^0-9.]/.test((chr || 'a'));
-const getSurroudingNumbers = (schematics, rowIndex, i) => {
+const getSurroundingNumbers = (schematics, rowIndex, i) => {
     const deltas = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
     const adjacentNumbers = [];
     deltas
@@ -53,7 +53,7 @@ export const solve = (file, fnToApplyToAdjacentNumbers) => {
         for (let i = 0; i < row.length; i++) {
             if (isSymbol(row[i])) {
                 // Check adjacent cells for number
-                const adjacentNumbers = getSurroudingNumbers(schematics, rowIndex, i);
+                const adjacentNumbers = getSurroundingNumbers(schematics, rowIndex, i);
                 fnToApplyToAdjacentNumbers(nums, adjacentNumbers, row[i]);
             }
         }
