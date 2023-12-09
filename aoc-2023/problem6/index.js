@@ -1,5 +1,12 @@
 import {readMultiLinedFile} from "../../util.js";
 
+const calculateWinners = (time, wins, distanceToBeat) => {
+    const left = Math.floor((-time + Math.sqrt((time * time - 4 * distanceToBeat))) / 2);
+    const right = Math.ceil((-time - Math.sqrt((time * time - 4 * distanceToBeat))) / 2);
+    const winners = left - right + 1;
+    return winners * wins;
+}
+
 const partOne = file => {
     const [times, distance] = readMultiLinedFile(file)
         .map(line => {
@@ -8,19 +15,7 @@ const partOne = file => {
             return arr.map(str => parseInt(str));
         });
 
-
-    return times.reduce((wins, time, index) => {
-        const distanceToBeat = distance[index];
-
-        const winners = new Array(time)
-            .fill(0)
-            .filter((v, acc) => {
-                let distance = (time - acc) * acc;
-                return distance > distanceToBeat
-            });
-
-        return winners.length > 0 ? winners.length * wins : wins;
-    }, 1)
+    return times.reduce((wins, time, index) => calculateWinners(time, wins, distance[index] + 1), 1)
 };
 
 const partTwo = file => {
@@ -31,24 +26,12 @@ const partTwo = file => {
             return parseInt(arr.join(''));
         });
 
-    const numWinners = new Array(time)
-        .fill(0)
-        .filter((v, acc) => {
-            let distance = (time - acc) * acc;
-            return distance > distanceToBeat
-        });
-
-    return numWinners.length;
+    return calculateWinners(time, 1, distanceToBeat + 1);
 }
 
-// 21039729
 
 // console.log(partOne('input-sample.txt'));
 // console.log(partOne('input.txt'));
-
+//
 // console.log(partTwo('input-sample.txt'));
-const start = new Date().valueOf();
-
-console.log(partTwo('input.txt'));
-
-console.log(`Time taken: ${new Date().valueOf() - start}`);
+// console.log(partTwo('input.txt'));
