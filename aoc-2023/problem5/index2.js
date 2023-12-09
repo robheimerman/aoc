@@ -1,37 +1,46 @@
 import {readMultiLinedFile} from "../../util.js";
 import _ from 'lodash';
 
-const partOne = file => {
-    const almanac = readMultiLinedFile(file);
-    const seeds = almanac[0]
-        .slice(7)
-        .split(' ')
-        .map(str => parseInt(str));
-
-    return fileParser(almanac, seeds, getIndexes(almanac));
-}
 
 const partTwo = file => {
     const almanac = readMultiLinedFile(file);
     const indexes = getIndexes(almanac);
-    const seedRanges = almanac[0]
+
+    const mappings =
+        indexes
+            .map((v, i) =>
+                getAlmanacRanges(almanac, i, indexes.length, v, indexes[i + 1])
+                    .map(range => range.split(" ").map(str => parseInt(str))));
+
+
+    const seeds = almanac[0]
         .slice(7)
         .split(' ');
 
     let min = +Infinity;
 
-    const seedIntervals = _.chain(seedRanges)
-        .map(str => parseInt(str))
-        .chunk(2)
-        .map(([start, length]) => [start, start + length -1])
-        .value();
+    const seedRanges =
+        _.chain(seeds)
+            .map(str => parseInt(str))
+            .chunk(2)
+            .map(([start, length]) => [start, start + length - 1])
+            .value();
 
-    makeIntervals(seedIntervals[0], getAlmanacRanges(almanac, 0, indexes.length, indexes[0], indexes[1]));
-    return seedIntervals;
+    seedRanges.forEach(seeds => {
+        mappings.forEach(mapping => makeInterval(seeds, mapping));
+    });
+
+    return seedRanges;
 }
 
-const makeIntervals = ([start, end], nextMapping) => {
-    console.log('here');
+const makeInterval = ([start, end], mapping) => {
+    const startDestination = getDestination(start, mapping);
+    const endingDestination = getDestination(end, mapping);
+    const difference = end - start;
+
+
+
+
 
 }
 
