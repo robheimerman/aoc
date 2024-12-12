@@ -1,3 +1,3 @@
-import {partTwo} from "./aoc-2024/problem1/index.js";
+import {partTwo} from "./aoc-2024/problem2/index.js";
 
 console.log(partTwo());
