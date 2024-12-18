@@ -1,7 +1,7 @@
 import fs from "fs";
 import {join} from 'path';
 
-export const readSingleLinedFile = filePath => fs.readFileSync(filePath, 'utf8');
+export const readSingleLinedFile = filePath => fs.readFileSync(join(filePath, 'input'), 'utf8');
 
 export const readMultiLinedFile = (filePath) =>
     fs.readFileSync(filePath, 'utf8')
